@@ -27,6 +27,15 @@ class JobBolePythonAricleItem(scrapy.Item):
     tags = scrapy.Field()
     content = scrapy.Field()
 
+    def get_insert_sql(self):
+
+        insert_sql = """
+                        insert into jobbole_article(title, url, create_date, fav_nums)
+                        VALUES (%s, %s, %s, %s)
+                    """
+        pramgs = (self["title"], self["url"], self["create_date"], self["fav_nums"])
+        return insert_sql, pramgs
+
 
 class ZhihuQuestionItem(scrapy.Item):
     # 知乎的问题 item
@@ -40,6 +49,15 @@ class ZhihuQuestionItem(scrapy.Item):
     watch_user_num = scrapy.Field()
     click_num = scrapy.Field()
     crawl_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        # 插入zhihuquestion表的sql语句
+        insert_sql = """
+                          insert into jobbole_article(title, url, create_date, fav_nums)
+                          VALUES (%s, %s, %s, %s)
+                      """
+        pramgs = (self["title"], self["url"], self["create_date"], self["fav_nums"])
+        return insert_sql, pramgs
 
 
 class ZhihuAnswerItem(scrapy.Item):
